@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* Estiliza o corpo da página */
+body {
+    font-family: "Chakra Petch", sans-serif;
+    background-image: url(imagens/festival.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantenha esta linha para a imagem fixa */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0; /* Remova o padding aqui para não criar bordas transparentes */
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 80px 0 40px 0; /* Aumentar o padding superior para empurrar o conteúdo para baixo, longe do topo da tela */
+    /* background-color: rgba(0, 0, 0, 0.2); /* Opcional: um fundo bem sutil para o header */
+}
+
+header h1 {
+    font-size: 3.5rem;
+    color: #F5F7F8; /* Cor branca para alto contraste */
+    text-align: center;
+    letter-spacing: 0.2rem;
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
+}
+
+main {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; /* Você pode usar isso se quiser centralizar verticalmente na tela sem resultados */
+    padding-bottom: 100px; /* Espaço para o footer */
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+section input {
+    width: 100%;
+    max-width: 450px;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 30px;
+    margin-bottom: 1rem;
+    color: #45474B;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+section input::placeholder {
+    color: #777;
+}
+
+section input:focus {
+    outline: none;
+    border: 2px solid #55cbdd;
+    box-shadow: 0 0 10px rgba(85, 203, 221, 0.5);
+    background-color: #ffffff;
+}
+
+section button {
+    padding: 1.1rem 2rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #55cbdd;
+    color: #F5F7F8;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+section button:hover {
+    background-color: #3e9cac;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+section button:active {
+    background-color: #2b7a8a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+/* Estiliza a caixa de resultados da pesquisa */
+.resultados-pesquisa {
+    width: 100%;
+    max-width: 800px;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-top: 2rem; /* Aumenta a margem superior para afastar dos campos de busca */
+    padding: 1.5rem;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo quase branco */
+    border: none; /* Remova a borda se quiser um visual mais limpo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    
+    /* --- IMPORTANTE: Ocultar por padrão --- */
+    display: none; /* Oculta a seção de resultados inicialmente */
+    opacity: 0; /* Para transição de opacidade */
+    transform: translateY(20px); /* Para transição de movimento */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transição suave */
+}
+
+/* Classe para exibir os resultados */
+.resultados-pesquisa.visible {
+    display: block; /* Ou flex, dependendo do layout interno original, mas block é mais simples */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Estilos para os itens de resultado (mantidos ou melhorados levemente) */
+.item-resultado {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-resultado:last-child {
+    margin-bottom: 0; /* Remove margem do último item para não ter espaço extra no final */
+}
+
+.item-resultado:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.item-resultado .imagem-evento {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.item-resultado h2 {
+    font-size: 2rem;
+    color: #30475E;
+    margin: 0;
+}
+
+.item-resultado .data-local {
+    color: #777;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.item-resultado .descricao-meta {
+    color: #45474B;
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.item-resultado .botao-mais-info {
+    display: inline-block;
+    padding: 0.9rem 1.5rem;
+    background-color: #55cbdd;
+    color: #fff;
+    border-radius: 25px;
+    text-align: center;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-resultado .botao-mais-info:hover {
+    background-color: #3e9cac;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mensagem-feedback {
+    color: #F5F7F8;
+    background-color: rgba(217, 83, 79, 0.8);
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Para transição */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Classe para exibir a mensagem de feedback */
+.mensagem-feedback.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+footer {
+    background-color: rgba(48, 71, 94, 0.9);
+    color: #F5F7F8;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    margin-top: auto;
+    font-size: 0.95rem;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Media Queries (mantenha os ajustes que fizemos) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.8rem;
+        letter-spacing: 0.1rem;
+    }
+
+    section input {
+        max-width: 350px;
+    }
+
+    .resultados-pesquisa {
+        max-width: 90%;
+    }
+
+    .item-resultado h2 {
+        font-size: 1.6rem;
+    }
+
+    .item-resultado .imagem-evento {
+        height: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 0.05rem;
+    }
+
+    section input {
+        width: 90%;
+        max-width: none;
+    }
+
+    section button {
+        font-size: 1rem;
+        padding: 0.9rem 1.5rem;
+    }
+
+    .item-resultado {
+        padding: 1rem;
+    }
+
+    .item-resultado h2 {
+        font-size: 1.3rem;
+    }
+
+    .item-resultado .imagem-evento {
+        height: 120px;
+    }
+}
